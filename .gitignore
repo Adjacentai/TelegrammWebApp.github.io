@@ -1,0 +1,16 @@
+.env
+
+.idea/
+
+**/.DS_Store
+
+Thumbs.db
+
+*.swp
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+node_modules/
