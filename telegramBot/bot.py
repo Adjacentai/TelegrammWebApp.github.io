@@ -5,7 +5,7 @@ from os import getenv
 from dotenv import load_dotenv
 
 from aiogram import Bot, Dispatcher, types
-from aiogram.dispatcher.filters import CommandStart
+from aiogram.filters import CommandStart
 
 from aiogram.types import Message, WebAppInfo, MenuButtonWebApp
 
@@ -17,12 +17,12 @@ if TOKEN is None:
 
 bot = Bot(token=TOKEN)
 # All handlers should be attached to the Router
-dp = Dispatcher(bot)
+dp = Dispatcher()
 
 
 async def set_web_app_menu_button(bot: Bot):
     # URL
-    web_app_url = ''
+    web_app_url = 'https://adjacentai.github.io/TelegrammWebApp.github.io/docs/index.html'
 
     # MenuButtonWebApp
     menu_button = MenuButtonWebApp(
@@ -33,11 +33,9 @@ async def set_web_app_menu_button(bot: Bot):
     # MenuButtonWebApp
     await bot.set_chat_menu_button(menu_button=menu_button)
 
-@dp.message_handler(CommandStart())
+@dp.message(CommandStart())
 async def send_welcome(message: types.Message):
     await message.reply("Hello! Click the button below to open the Web App.")
-
-
 
 
 async def main() -> None:
