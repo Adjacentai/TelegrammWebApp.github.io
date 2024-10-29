@@ -5,11 +5,12 @@ from os import getenv
 from dotenv import load_dotenv
 
 from aiogram import Bot, Dispatcher, types
-from aiogram.filters import CommandStart
-
 from aiogram.types import Message, WebAppInfo, MenuButtonWebApp
 
+from commands import router
+
 load_dotenv()
+
 TOKEN = getenv("TOKEN_API")
 
 if TOKEN is None:
@@ -17,7 +18,7 @@ if TOKEN is None:
 
 bot = Bot(token=TOKEN)
 # All handlers should be attached to the Router
-dp = Dispatcher()
+dp = Dispatcher(router=router)
 
 
 async def set_web_app_menu_button(bot: Bot):
@@ -32,10 +33,6 @@ async def set_web_app_menu_button(bot: Bot):
 
     # MenuButtonWebApp
     await bot.set_chat_menu_button(menu_button=menu_button)
-
-@dp.message(CommandStart())
-async def send_welcome(message: types.Message):
-    await message.reply("Hello! Click the button below to open the Web App.")
 
 
 async def main() -> None:
