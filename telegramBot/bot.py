@@ -18,8 +18,8 @@ if TOKEN is None:
 
 bot = Bot(token=TOKEN)
 # All handlers should be attached to the Router
-dp = Dispatcher(router=router)
-
+dp = Dispatcher()
+dp.include_router(router)
 
 async def set_web_app_menu_button(bot: Bot):
     # URL
